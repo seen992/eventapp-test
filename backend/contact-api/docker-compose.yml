@@ -1,0 +1,26 @@
+services:
+  contact-api-develop:
+    build:
+      context: "."
+    restart: always
+    container_name: contact-api
+    working_dir: /opt/basicduo
+    command: uvicorn app.main:app --host 0.0.0.0 --reload --port 8080 --workers 1
+    ports:
+      - 9118:8080
+    networks:
+      - basicduo_develop
+    environment:
+      DEBUG: 1
+      POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD}
+      POSTGRES_DB_USER: ${POSTGRES_DB_USER}
+      POSTGRES_DB_HOST: ${POSTGRES_DB_HOST}
+      POSTGRES_DB_PORT: ${POSTGRES_DB_PORT}
+      POSTGRES_DB_SCHEMA: ${POSTGRES_DB_SCHEMA}
+    volumes:
+      - ./app:/opt/basicduo/app
+      - ./tests:/opt/basicduo/tests
+      - ./alembic:/opt/basicduo/alembic
+networks:
+  basicduo_develop:
+    external: true

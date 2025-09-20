@@ -1,0 +1,2425 @@
+openapi: 3.0.3
+info:
+  title: Events App API
+  description: |
+    Events Management Platform API - MVP Faza 1
+
+    Omogućava korisnicima kreiranje i upravljanje događajima sa QR kod sistemom
+    za upload slika, upravljanje gostima i kolaboraciju.
+
+    **Autentifikacija:** AWS Cognito + Gmail OAuth
+    **Regioni:** Srbija, BiH, Hrvatska, Crna Gora, Makedonija
+  version: 1.0.0
+  contact:
+    name: Events App API Support
+    email: support@eventsapp.com
+  license:
+    name: MIT
+  x-gitbook-description-document:
+    object: document
+    data:
+      schemaVersion: 8
+    nodes:
+      - object: block
+        type: paragraph
+        isVoid: false
+        data: {}
+        nodes:
+          - object: text
+            leaves:
+              - object: leaf
+                text: Events Management Platform API - MVP Faza 1
+                marks: []
+      - object: block
+        type: paragraph
+        isVoid: false
+        data: {}
+        nodes:
+          - object: text
+            leaves:
+              - object: leaf
+                text: >-
+                  Omogućava korisnicima kreiranje i upravljanje događajima sa QR
+                  kod sistemom za upload slika, upravljanje gostima i
+                  kolaboraciju.
+                marks: []
+      - object: block
+        type: paragraph
+        isVoid: false
+        data: {}
+        nodes:
+          - object: text
+            leaves:
+              - object: leaf
+                text: 'Autentifikacija:'
+                marks:
+                  - object: mark
+                    type: bold
+                    data: {}
+              - object: leaf
+                text: ' AWS Cognito + Gmail OAuth '
+                marks: []
+              - object: leaf
+                text: 'Regioni:'
+                marks:
+                  - object: mark
+                    type: bold
+                    data: {}
+              - object: leaf
+                text: ' Srbija, BiH, Hrvatska, Crna Gora, Makedonija'
+                marks: []
+  x-gitbook-description-html: >-
+    <p>Events Management Platform API - MVP Faza 1</p><p>Omogućava korisnicima
+    kreiranje i upravljanje događajima sa QR kod sistemom za upload slika,
+    upravljanje gostima i kolaboraciju.</p><p><strong>Autentifikacija:</strong>
+    AWS Cognito + Gmail OAuth <strong>Regioni:</strong> Srbija, BiH, Hrvatska,
+    Crna Gora, Makedonija</p>
+servers:
+  - url: https://api.eventsapp.com/v1
+    description: Production server
+    x-gitbook-description-html: <p>Production server</p>
+  - url: https://api-staging.eventsapp.com/v1
+    description: Staging server
+    x-gitbook-description-html: <p>Staging server</p>
+security:
+  - CognitoAuth: []
+tags:
+  - name: Authentication
+    description: User authentication and authorization
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: User authentication and authorization
+                  marks: []
+    x-gitbook-description-html: <p>User authentication and authorization</p>
+  - name: Users
+    description: User profile management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: User profile management
+                  marks: []
+    x-gitbook-description-html: <p>User profile management</p>
+  - name: Events
+    description: Event creation and management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Event creation and management
+                  marks: []
+    x-gitbook-description-html: <p>Event creation and management</p>
+  - name: Guests
+    description: Guest management for events
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Guest management for events
+                  marks: []
+    x-gitbook-description-html: <p>Guest management for events</p>
+  - name: Photos
+    description: Photo upload and management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Photo upload and management
+                  marks: []
+    x-gitbook-description-html: <p>Photo upload and management</p>
+  - name: Menu
+    description: Food and drinks menu management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Food and drinks menu management
+                  marks: []
+    x-gitbook-description-html: <p>Food and drinks menu management</p>
+  - name: Agenda
+    description: Event schedule and program management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Event schedule and program management
+                  marks: []
+    x-gitbook-description-html: <p>Event schedule and program management</p>
+  - name: Collaboration
+    description: Event collaboration features
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: Event collaboration features
+                  marks: []
+    x-gitbook-description-html: <p>Event collaboration features</p>
+  - name: QR Codes
+    description: QR code generation and management
+    x-gitbook-description-document:
+      object: document
+      data:
+        schemaVersion: 8
+      nodes:
+        - object: block
+          type: paragraph
+          isVoid: false
+          data: {}
+          nodes:
+            - object: text
+              leaves:
+                - object: leaf
+                  text: QR code generation and management
+                  marks: []
+    x-gitbook-description-html: <p>QR code generation and management</p>
+paths:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      summary: User login
+      description: Authenticate user via AWS Cognito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 8
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+          x-gitbook-description-html: <p>Login successful</p>
+        '400':
+          description: Bad request
+          x-gitbook-description-html: <p>Bad request</p>
+        '401':
+          description: Invalid credentials
+          x-gitbook-description-html: <p>Invalid credentials</p>
+      x-gitbook-description-document:
+        object: document
+        data:
+          schemaVersion: 8
+        nodes:
+          - object: block
+            type: paragraph
+            isVoid: false
+            data: {}
+            nodes:
+              - object: text
+                leaves:
+                  - object: leaf
+                    text: Authenticate user via AWS Cognito
+                    marks: []
+      x-gitbook-description-html: <p>Authenticate user via AWS Cognito</p>
+  /auth/gmail:
+    post:
+      tags:
+        - Authentication
+      summary: Gmail OAuth login
+      description: Authenticate user via Gmail OAuth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gmail_token:
+                  type: string
+              required:
+                - gmail_token
+      responses:
+        '200':
+          description: OAuth login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+          x-gitbook-description-html: <p>OAuth login successful</p>
+        '401':
+          description: Invalid OAuth token
+          x-gitbook-description-html: <p>Invalid OAuth token</p>
+      x-gitbook-description-document:
+        object: document
+        data:
+          schemaVersion: 8
+        nodes:
+          - object: block
+            type: paragraph
+            isVoid: false
+            data: {}
+            nodes:
+              - object: text
+                leaves:
+                  - object: leaf
+                    text: Authenticate user via Gmail OAuth
+                    marks: []
+      x-gitbook-description-html: <p>Authenticate user via Gmail OAuth</p>
+  /auth/refresh:
+    post:
+      tags:
+        - Authentication
+      summary: Refresh access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+              required:
+                - refresh_token
+      responses:
+        '200':
+          description: Token refreshed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+          x-gitbook-description-html: <p>Token refreshed</p>
+  /users/profile:
+    get:
+      tags:
+        - Users
+      summary: Get user profile
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          x-gitbook-description-html: <p>User profile retrieved</p>
+    put:
+      tags:
+        - Users
+      summary: Update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+      responses:
+        '200':
+          description: Profile updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          x-gitbook-description-html: <p>Profile updated successfully</p>
+  /events:
+    get:
+      tags:
+        - Events
+      summary: Get user's events
+      description: Retrieve all events created by or shared with the user
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - active
+              - expired
+              - draft
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Events retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  events:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Event'
+                  total:
+                    type: integer
+                  has_more:
+                    type: boolean
+          x-gitbook-description-html: <p>Events retrieved successfully</p>
+      x-gitbook-description-document:
+        object: document
+        data:
+          schemaVersion: 8
+        nodes:
+          - object: block
+            type: paragraph
+            isVoid: false
+            data: {}
+            nodes:
+              - object: text
+                leaves:
+                  - object: leaf
+                    text: Retrieve all events created by or shared with the user
+                    marks: []
+      x-gitbook-description-html: <p>Retrieve all events created by or shared with the user</p>
+    post:
+      tags:
+        - Events
+      summary: Create new event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventCreate'
+      responses:
+        '201':
+          description: Event created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          x-gitbook-description-html: <p>Event created successfully</p>
+        '400':
+          description: Invalid input data
+          x-gitbook-description-html: <p>Invalid input data</p>
+        '402':
+          description: Payment required for selected plan
+          x-gitbook-description-html: <p>Payment required for selected plan</p>
+  /events/{event_id}:
+    get:
+      tags:
+        - Events
+      summary: Get event details
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Event details retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventDetail'
+          x-gitbook-description-html: <p>Event details retrieved</p>
+        '404':
+          description: Event not found
+          x-gitbook-description-html: <p>Event not found</p>
+    put:
+      tags:
+        - Events
+      summary: Update event
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdate'
+      responses:
+        '200':
+          description: Event updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          x-gitbook-description-html: <p>Event updated successfully</p>
+    delete:
+      tags:
+        - Events
+      summary: Delete event
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Event deleted successfully
+          x-gitbook-description-html: <p>Event deleted successfully</p>
+        '403':
+          description: Not authorized to delete this event
+          x-gitbook-description-html: <p>Not authorized to delete this event</p>
+  /events/{event_id}/qr:
+    get:
+      tags:
+        - QR Codes
+      summary: Get event QR code
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum:
+              - png
+              - svg
+              - pdf
+            default: png
+        - name: size
+          in: query
+          schema:
+            type: integer
+            default: 300
+      responses:
+        '200':
+          description: QR code generated
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+            image/svg+xml:
+              schema:
+                type: string
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+          x-gitbook-description-html: <p>QR code generated</p>
+  /events/{event_id}/landing:
+    get:
+      tags:
+        - Events
+      summary: Get event landing page configuration
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Landing page configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LandingPageConfig'
+          x-gitbook-description-html: <p>Landing page configuration</p>
+    put:
+      tags:
+        - Events
+      summary: Update landing page configuration
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LandingPageConfig'
+      responses:
+        '200':
+          description: Configuration updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LandingPageConfig'
+          x-gitbook-description-html: <p>Configuration updated</p>
+  /events/{event_id}/guests:
+    get:
+      tags:
+        - Guests
+      summary: Get event guests
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: group
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum:
+              - confirmed
+              - pending
+              - declined
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Guests retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  guests:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Guest'
+                  summary:
+                    $ref: '#/components/schemas/GuestSummary'
+          x-gitbook-description-html: <p>Guests retrieved successfully</p>
+    post:
+      tags:
+        - Guests
+      summary: Add new guest
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestCreate'
+      responses:
+        '201':
+          description: Guest added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+          x-gitbook-description-html: <p>Guest added successfully</p>
+  /events/{event_id}/guests/{guest_id}:
+    get:
+      tags:
+        - Guests
+      summary: Get guest details
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: guest_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Guest details retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+          x-gitbook-description-html: <p>Guest details retrieved</p>
+    put:
+      tags:
+        - Guests
+      summary: Update guest
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: guest_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestUpdate'
+      responses:
+        '200':
+          description: Guest updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Guest'
+          x-gitbook-description-html: <p>Guest updated successfully</p>
+    delete:
+      tags:
+        - Guests
+      summary: Delete guest
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: guest_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Guest deleted successfully
+          x-gitbook-description-html: <p>Guest deleted successfully</p>
+  /events/{event_id}/guests/export:
+    get:
+      tags:
+        - Guests
+      summary: Export guests list
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: format
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - csv
+              - xlsx
+        - name: include_family
+          in: query
+          schema:
+            type: boolean
+            default: true
+      responses:
+        '200':
+          description: Export file generated
+          content:
+            text/csv:
+              schema:
+                type: string
+                format: binary
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+          x-gitbook-description-html: <p>Export file generated</p>
+  /events/{event_id}/photos:
+    get:
+      tags:
+        - Photos
+      summary: Get event photos
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: uploader_email
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Photos retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  photos:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Photo'
+                  total:
+                    type: integer
+                  has_more:
+                    type: boolean
+          x-gitbook-description-html: <p>Photos retrieved successfully</p>
+    post:
+      tags:
+        - Photos
+      summary: Upload photo
+      description: Upload photo via QR code landing page
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                photo:
+                  type: string
+                  format: binary
+                uploader_name:
+                  type: string
+                uploader_email:
+                  type: string
+                  format: email
+              required:
+                - photo
+      responses:
+        '201':
+          description: Photo uploaded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Photo'
+          x-gitbook-description-html: <p>Photo uploaded successfully</p>
+        '400':
+          description: Invalid file format
+          x-gitbook-description-html: <p>Invalid file format</p>
+        '413':
+          description: File too large
+          x-gitbook-description-html: <p>File too large</p>
+      x-gitbook-description-document:
+        object: document
+        data:
+          schemaVersion: 8
+        nodes:
+          - object: block
+            type: paragraph
+            isVoid: false
+            data: {}
+            nodes:
+              - object: text
+                leaves:
+                  - object: leaf
+                    text: Upload photo via QR code landing page
+                    marks: []
+      x-gitbook-description-html: <p>Upload photo via QR code landing page</p>
+  /events/{event_id}/photos/{photo_id}:
+    delete:
+      tags:
+        - Photos
+      summary: Delete photo
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: photo_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Photo deleted successfully
+          x-gitbook-description-html: <p>Photo deleted successfully</p>
+  /events/{event_id}/photos/download:
+    get:
+      tags:
+        - Photos
+      summary: Download all photos as ZIP
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: ZIP file generated
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+          x-gitbook-description-html: <p>ZIP file generated</p>
+  /events/{event_id}/menu:
+    get:
+      tags:
+        - Menu
+      summary: Get event menu
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Menu retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+          x-gitbook-description-html: <p>Menu retrieved successfully</p>
+        '404':
+          description: Menu not found
+          x-gitbook-description-html: <p>Menu not found</p>
+    post:
+      tags:
+        - Menu
+      summary: Create event menu
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuCreate'
+      responses:
+        '201':
+          description: Menu created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+          x-gitbook-description-html: <p>Menu created successfully</p>
+    put:
+      tags:
+        - Menu
+      summary: Update event menu
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuUpdate'
+      responses:
+        '200':
+          description: Menu updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Menu'
+          x-gitbook-description-html: <p>Menu updated successfully</p>
+    delete:
+      tags:
+        - Menu
+      summary: Delete event menu
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Menu deleted successfully
+          x-gitbook-description-html: <p>Menu deleted successfully</p>
+  /events/{event_id}/menu/categories:
+    post:
+      tags:
+        - Menu
+      summary: Add menu category
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuCategoryCreate'
+      responses:
+        '201':
+          description: Category added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuCategory'
+          x-gitbook-description-html: <p>Category added successfully</p>
+  /events/{event_id}/menu/categories/{category_id}:
+    put:
+      tags:
+        - Menu
+      summary: Update menu category
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuCategoryUpdate'
+      responses:
+        '200':
+          description: Category updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuCategory'
+          x-gitbook-description-html: <p>Category updated successfully</p>
+    delete:
+      tags:
+        - Menu
+      summary: Delete menu category
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: category_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Category deleted successfully
+          x-gitbook-description-html: <p>Category deleted successfully</p>
+  /events/{event_id}/menu/items:
+    post:
+      tags:
+        - Menu
+      summary: Add menu item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemCreate'
+      responses:
+        '201':
+          description: Menu item added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+          x-gitbook-description-html: <p>Menu item added successfully</p>
+  /events/{event_id}/menu/items/{item_id}:
+    put:
+      tags:
+        - Menu
+      summary: Update menu item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItemUpdate'
+      responses:
+        '200':
+          description: Menu item updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+          x-gitbook-description-html: <p>Menu item updated successfully</p>
+    delete:
+      tags:
+        - Menu
+      summary: Delete menu item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Menu item deleted successfully
+          x-gitbook-description-html: <p>Menu item deleted successfully</p>
+  /events/{event_id}/agenda:
+    get:
+      tags:
+        - Agenda
+      summary: Get event agenda
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Agenda retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          x-gitbook-description-html: <p>Agenda retrieved successfully</p>
+        '404':
+          description: Agenda not found
+          x-gitbook-description-html: <p>Agenda not found</p>
+    post:
+      tags:
+        - Agenda
+      summary: Create event agenda
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaCreate'
+      responses:
+        '201':
+          description: Agenda created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          x-gitbook-description-html: <p>Agenda created successfully</p>
+    put:
+      tags:
+        - Agenda
+      summary: Update event agenda
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaUpdate'
+      responses:
+        '200':
+          description: Agenda updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agenda'
+          x-gitbook-description-html: <p>Agenda updated successfully</p>
+    delete:
+      tags:
+        - Agenda
+      summary: Delete event agenda
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Agenda deleted successfully
+          x-gitbook-description-html: <p>Agenda deleted successfully</p>
+  /events/{event_id}/agenda/items:
+    post:
+      tags:
+        - Agenda
+      summary: Add agenda item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaItemCreate'
+      responses:
+        '201':
+          description: Agenda item added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgendaItem'
+          x-gitbook-description-html: <p>Agenda item added successfully</p>
+  /events/{event_id}/agenda/items/{item_id}:
+    put:
+      tags:
+        - Agenda
+      summary: Update agenda item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgendaItemUpdate'
+      responses:
+        '200':
+          description: Agenda item updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgendaItem'
+          x-gitbook-description-html: <p>Agenda item updated successfully</p>
+    delete:
+      tags:
+        - Agenda
+      summary: Delete agenda item
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: item_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Agenda item deleted successfully
+          x-gitbook-description-html: <p>Agenda item deleted successfully</p>
+  /events/{event_id}/agenda/reorder:
+    put:
+      tags:
+        - Agenda
+      summary: Reorder agenda items
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                item_orders:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      item_id:
+                        type: string
+                        format: uuid
+                      order:
+                        type: integer
+                    required:
+                      - item_id
+                      - order
+              required:
+                - item_orders
+      responses:
+        '200':
+          description: Agenda items reordered successfully
+          x-gitbook-description-html: <p>Agenda items reordered successfully</p>
+  /events/{event_id}/collaborators:
+    get:
+      tags:
+        - Collaboration
+      summary: Get event collaborators
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Collaborators retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Collaborator'
+          x-gitbook-description-html: <p>Collaborators retrieved</p>
+    post:
+      tags:
+        - Collaboration
+      summary: Add collaborator
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                permissions:
+                  type: array
+                  items:
+                    type: string
+                    enum:
+                      - manage_guests
+                      - manage_photos
+                      - edit_event
+                      - manage_landing
+                      - manage_menu
+                      - manage_agenda
+              required:
+                - email
+      responses:
+        '201':
+          description: Collaborator added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collaborator'
+          x-gitbook-description-html: <p>Collaborator added successfully</p>
+        '400':
+          description: Collaboration limit reached for plan
+          x-gitbook-description-html: <p>Collaboration limit reached for plan</p>
+  /events/{event_id}/collaborators/{user_id}:
+    delete:
+      tags:
+        - Collaboration
+      summary: Remove collaborator
+      parameters:
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Collaborator removed successfully
+          x-gitbook-description-html: <p>Collaborator removed successfully</p>
+components:
+  securitySchemes:
+    CognitoAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: AWS Cognito JWT token
+      x-gitbook-description-html: <p>AWS Cognito JWT token</p>
+  schemas:
+    AuthResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+        refresh_token:
+          type: string
+        expires_in:
+          type: integer
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    UserUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        phone:
+          type: string
+    EventPlan:
+      type: string
+      enum:
+        - freemium
+        - starter
+        - plus
+        - full
+      description: |
+        - freemium: 50 slika, 15 dana, ZIP download
+        - starter: 200 slika, 3 meseca, ZIP download
+        - plus: 500 slika, 6 meseci, galerija, 2 kolaboratora
+        - full: 2000 slika, 12 meseci, galerija, 5 kolaboratora
+      x-gitbook-description-html: |-
+        <ul>
+        <li>freemium: 50 slika, 15 dana, ZIP download</li>
+        <li>starter: 200 slika, 3 meseca, ZIP download</li>
+        <li>plus: 500 slika, 6 meseci, galerija, 2 kolaboratora</li>
+        <li>full: 2000 slika, 12 meseci, galerija, 5 kolaboratora</li>
+        </ul>
+    EventCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        plan:
+          $ref: '#/components/schemas/EventPlan'
+        location:
+          type: string
+        restaurant_name:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+          format: time
+        event_type:
+          type: string
+          enum:
+            - wedding
+            - birthday
+            - baptism
+            - graduation
+            - anniversary
+            - corporate
+            - other
+        expected_guests:
+          type: integer
+          minimum: 1
+        description:
+          type: string
+          maxLength: 1000
+      required:
+        - name
+        - plan
+        - location
+        - date
+        - time
+        - event_type
+    EventUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 200
+        location:
+          type: string
+        restaurant_name:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+          format: time
+        event_type:
+          type: string
+          enum:
+            - wedding
+            - birthday
+            - baptism
+            - graduation
+            - anniversary
+            - corporate
+            - other
+        expected_guests:
+          type: integer
+          minimum: 1
+        description:
+          type: string
+          maxLength: 1000
+    Event:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        plan:
+          $ref: '#/components/schemas/EventPlan'
+        location:
+          type: string
+        restaurant_name:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+          format: time
+        event_type:
+          type: string
+        expected_guests:
+          type: integer
+        description:
+          type: string
+        qr_code_url:
+          type: string
+          format: uri
+        landing_page_url:
+          type: string
+          format: uri
+        photo_count:
+          type: integer
+        guest_count:
+          type: integer
+        status:
+          type: string
+          enum:
+            - active
+            - expired
+            - draft
+        expires_at:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+        owner:
+          $ref: '#/components/schemas/User'
+    EventDetail:
+      allOf:
+        - $ref: '#/components/schemas/Event'
+        - type: object
+          properties:
+            collaborators:
+              type: array
+              items:
+                $ref: '#/components/schemas/Collaborator'
+            landing_config:
+              $ref: '#/components/schemas/LandingPageConfig'
+            menu:
+              $ref: '#/components/schemas/Menu'
+            agenda:
+              $ref: '#/components/schemas/Agenda'
+            plan_limits:
+              type: object
+              properties:
+                max_photos:
+                  type: integer
+                max_collaborators:
+                  type: integer
+                access_days:
+                  type: integer
+                has_gallery:
+                  type: boolean
+    LandingPageConfig:
+      type: object
+      properties:
+        require_uploader_info:
+          type: boolean
+          default: false
+        sections_order:
+          type: array
+          items:
+            type: string
+            enum:
+              - upload
+              - menu
+              - agenda
+          default:
+            - upload
+            - menu
+            - agenda
+        custom_message:
+          type: string
+          maxLength: 500
+        show_event_details:
+          type: boolean
+          default: true
+    GuestCreate:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        group:
+          type: string
+          enum:
+            - bride_side
+            - groom_side
+            - family
+            - friends
+            - colleagues
+            - other
+        dietary_requirements:
+          type: string
+          maxLength: 500
+        notes:
+          type: string
+          maxLength: 500
+        family_group_id:
+          type: string
+          format: uuid
+          description: Connect to existing family group
+          x-gitbook-description-html: <p>Connect to existing family group</p>
+        age:
+          type: number
+          format: integer
+          example: 25
+        guest_level:
+          type: number
+          format: integer
+          example: 1
+        related_guests:
+          type: array
+          items:
+            type: object
+            properties:
+              first_name:
+                type: string
+                example: John
+                maxLength: 100
+              last_name:
+                type: string
+                example: Doe
+                maxLength: 100
+              email:
+                type: string
+                example: john.doe@gmail.com
+                format: email
+              phone:
+                type: string
+                example: 385926252
+              group:
+                type: string
+                enum:
+                  - bride_side
+                  - groom_side
+                  - family
+                  - friends
+                  - colleagues
+                  - other
+                example: friends
+              dietary_requirements:
+                type: string
+                example: vegan
+                maxLength: 500
+              notes:
+                type: string
+                maxLength: 500
+                example: Does not love sit near the music
+              age:
+                type: number
+                format: integer
+                example: 25
+              guest_level:
+                type: number
+                format: integer
+                example: 1
+              relation_type:
+                type: string
+                enum:
+                  - children
+                  - wifehusbend
+                  - parent
+                  - other
+                example: child
+      required:
+        - first_name
+        - last_name
+        - group
+    GuestUpdate:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 100
+        last_name:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        group:
+          type: string
+          enum:
+            - bride_side
+            - groom_side
+            - family
+            - friends
+            - colleagues
+            - other
+        dietary_requirements:
+          type: string
+          maxLength: 500
+        notes:
+          type: string
+          maxLength: 500
+        status:
+          type: string
+          enum:
+            - pending
+            - confirmed
+            - declined
+        age:
+          type: number
+          format: integer
+          example: 25
+        relation_type:
+          type: string
+          enum:
+            - children
+            - wifehusbend
+            - parent
+            - other
+    Guest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        group:
+          type: string
+        dietary_requirements:
+          type: string
+        notes:
+          type: string
+        status:
+          type: string
+          enum:
+            - pending
+            - confirmed
+            - declined
+        family_group_id:
+          type: string
+          format: uuid
+        age:
+          type: number
+          format: integer
+          example: 25
+        related_guests:
+          type: array
+          items:
+            type: object
+            properties:
+              first_name:
+                type: string
+                example: John
+                maxLength: 100
+              last_name:
+                type: string
+                example: Doe
+                maxLength: 100
+              email:
+                type: string
+                example: john.doe@gmail.com
+                format: email
+              phone:
+                type: string
+                example: 385926252
+              group:
+                type: string
+                enum:
+                  - bride_side
+                  - groom_side
+                  - family
+                  - friends
+                  - colleagues
+                  - other
+                example: friends
+              dietary_requirements:
+                type: string
+                example: vegan
+                maxLength: 500
+              notes:
+                type: string
+                maxLength: 500
+                example: Does not love sit near the music
+              age:
+                type: number
+                format: integer
+                example: 25
+              guest_level:
+                type: number
+                format: integer
+                example: 1
+              relation_type:
+                type: string
+                enum:
+                  - children
+                  - wifehusbend
+                  - parent
+                  - other
+                example: child
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    GuestSummary:
+      type: object
+      properties:
+        total_invited:
+          type: integer
+        total_confirmed:
+          type: integer
+        total_pending:
+          type: integer
+        total_declined:
+          type: integer
+        by_group:
+          type: object
+          additionalProperties:
+            type: integer
+    Photo:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type: string
+        url:
+          type: string
+          format: uri
+        thumbnail_url:
+          type: string
+          format: uri
+        uploader_name:
+          type: string
+        uploader_email:
+          type: string
+          format: email
+        file_size:
+          type: integer
+    Collaborator:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        permissions:
+          type: array
+          items:
+            type: string
+            enum:
+              - manage_guests
+              - manage_photos
+              - edit_event
+              - manage_landing
+              - manage_menu
+              - manage_agenda
+        added_at:
+          type: string
+          format: date-time
+        added_by:
+          $ref: '#/components/schemas/User'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        code:
+          type: integer
+        details:
+          type: object
+    MenuCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+          default: Menu
+        description:
+          type: string
+          maxLength: 500
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuCategoryCreate'
+    MenuUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 500
+    Menu:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        event_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuCategory'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    MenuCategoryCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 300
+        display_order:
+          type: integer
+          default: 0
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItemCreate'
+      required:
+        - name
+    MenuCategoryUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+          maxLength: 300
+        display_order:
+          type: integer
+    MenuCategory:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        display_order:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuItem'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    MenuItemCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        description:
+          type: string
+          maxLength: 500
+        price:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+        currency:
+          type: string
+          enum:
+            - EUR
+            - RSD
+            - BAM
+            - HRK
+          default: EUR
+        category_id:
+          type: string
+          format: uuid
+        allergens:
+          type: array
+          items:
+            type: string
+            enum:
+              - gluten
+              - dairy
+              - nuts
+              - seafood
+              - eggs
+              - soy
+              - sesame
+              - other
+        dietary_info:
+          type: array
+          items:
+            type: string
+            enum:
+              - vegetarian
+              - vegan
+              - gluten_free
+              - dairy_free
+              - halal
+              - kosher
+        display_order:
+          type: integer
+          default: 0
+        available:
+          type: boolean
+          default: true
+      required:
+        - name
+        - category_id
+    MenuItemUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 150
+        description:
+          type: string
+          maxLength: 500
+        price:
+          type: number
+          format: decimal
+          multipleOf: 0.01
+        currency:
+          type: string
+          enum:
+            - EUR
+            - RSD
+            - BAM
+            - HRK
+        allergens:
+          type: array
+          items:
+            type: string
+        dietary_info:
+          type: array
+          items:
+            type: string
+        display_order:
+          type: integer
+        available:
+          type: boolean
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: decimal
+        currency:
+          type: string
+        allergens:
+          type: array
+          items:
+            type: string
+        dietary_info:
+          type: array
+          items:
+            type: string
+        display_order:
+          type: integer
+        available:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    AgendaCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+          default: Program događaja
+        description:
+          type: string
+          maxLength: 500
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaItemCreate'
+    AgendaUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 500
+    Agenda:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        event_id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgendaItem'
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    AgendaItemCreate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 500
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        location:
+          type: string
+          maxLength: 200
+        type:
+          type: string
+          enum:
+            - ceremony
+            - reception
+            - entertainment
+            - speech
+            - meal
+            - break
+            - photo_session
+            - other
+        display_order:
+          type: integer
+          default: 0
+        is_important:
+          type: boolean
+          default: false
+          description: Highlight important events (ceremony, speeches, etc.)
+          x-gitbook-description-html: <p>Highlight important events (ceremony, speeches, etc.)</p>
+      required:
+        - title
+        - start_time
+    AgendaItemUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+          maxLength: 200
+        description:
+          type: string
+          maxLength: 500
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        location:
+          type: string
+          maxLength: 200
+        type:
+          type: string
+          enum:
+            - ceremony
+            - reception
+            - entertainment
+            - speech
+            - meal
+            - break
+            - photo_session
+            - other
+        display_order:
+          type: integer
+        is_important:
+          type: boolean
+    AgendaItem:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
+        location:
+          type: string
+        type:
+          type: string
+        display_order:
+          type: integer
+        is_important:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
