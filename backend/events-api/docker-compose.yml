@@ -5,7 +5,7 @@ services:
     restart: always
     container_name: eventsapp-api
     working_dir: /opt/eventsapp
-    command: uvicorn main:app --host 0.0.0.0 --reload --port 8080 --workers 1
+    command: uvicorn app.main:app --host 0.0.0.0 --reload --port 8080 --workers 1
     ports:
       - 9118:8080
     networks:
