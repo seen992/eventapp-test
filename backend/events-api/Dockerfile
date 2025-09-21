@@ -12,6 +12,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip setuptools wheel \
     && pip install --no-cache-dir -r requirements.txt && pip install --no-cache-dir uvicorn==0.34.2
 
+RUN python3 -m pip list | grep uvicorn
 
 # Copy code
 COPY . .
