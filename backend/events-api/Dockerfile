@@ -1,26 +1,21 @@
-FROM python:3.13-slim
+FROM python:3.11-slim
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+WORKDIR /app
 
-WORKDIR /opt/basicduo
+# Install system deps
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-ADD requirements.txt ./
-RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
+# Install Python deps
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-ADD app ./app
-ADD tests ./tests
-ADD run_server.sh ./
+# Copy code
+COPY . .
 
-ENV POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
-ENV POSTGRES_DB_USER=${POSTGRES_DB_USER}
-ENV POSTGRES_DB_HOST=${POSTGRES_DB_HOST}
-ENV POSTGRES_DB_PORT=${POSTGRES_DB_PORT}
-ENV POSTGRES_DB_SCHEMA=${POSTGRES_DB_SCHEMA}
-
-RUN chmod g+rwX /opt/basicduo && \
-    chmod -R g=u /opt/basicduo && \
-    find / -perm /6000 -type f -exec chmod a-s {} \; || true
-
-USER 1001
-
+# Expose port
 EXPOSE 8080
+
+# Run uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
