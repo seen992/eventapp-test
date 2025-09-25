@@ -1,24 +1,26 @@
-FROM python:3.11-slim
+FROM python:3.13-slim
 
-WORKDIR /app
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 
-# Install system deps
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+WORKDIR /opt/basicduo
 
-# Install Python deps
-COPY requirements.txt .
-RUN pip install --upgrade pip setuptools wheel \
-    && pip install --no-cache-dir -r requirements.txt && pip install --no-cache-dir uvicorn==0.34.2
+ADD requirements.txt ./
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
-RUN python3 -m pip list | grep uvicorn
+ADD app ./app
+ADD tests ./tests
+ADD run_server.sh ./
 
-# Copy code
-COPY . .
+ENV POSTGRES_DB_PASSWORD=${POSTGRES_DB_PASSWORD}
+ENV POSTGRES_DB_USER=${POSTGRES_DB_USER}
+ENV POSTGRES_DB_HOST=${POSTGRES_DB_HOST}
+ENV POSTGRES_DB_PORT=${POSTGRES_DB_PORT}
+ENV POSTGRES_DB_SCHEMA=${POSTGRES_DB_SCHEMA}
 
-# Expose port
+RUN chmod g+rwX /opt/basicduo && \
+    chmod -R g=u /opt/basicduo && \
+    find / -perm /6000 -type f -exec chmod a-s {} \; || true
+
 EXPOSE 8080
 
-# Run uvicorn via python3 -m
-CMD ["python3", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "1"]
