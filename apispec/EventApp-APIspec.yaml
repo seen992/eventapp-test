@@ -1380,6 +1380,7 @@ paths:
       tags:
         - Agenda
       summary: Reorder agenda items
+      description: Bulk update display_order values for multiple agenda items with atomic transaction handling
       parameters:
         - name: event_id
           in: path
@@ -1392,27 +1393,28 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                item_orders:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      item_id:
-                        type: string
-                        format: uuid
-                      order:
-                        type: integer
-                    required:
-                      - item_id
-                      - order
-              required:
-                - item_orders
+              $ref: '#/components/schemas/AgendaReorderRequest'
       responses:
         '200':
           description: Agenda items reordered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                    example: "Agenda items successfully reordered."
           x-gitbook-description-html: <p>Agenda items reordered successfully</p>
+        '400':
+          description: Some agenda items don't belong to the specified agenda
+          x-gitbook-description-html: <p>Some agenda items don't belong to the specified agenda</p>
+        '403':
+          description: User doesn't have permission to access this event
+          x-gitbook-description-html: <p>User doesn't have permission to access this event</p>
+        '404':
+          description: Event or agenda not found
+          x-gitbook-description-html: <p>Event or agenda not found</p>
   /events/{event_id}/collaborators:
     get:
       tags:
@@ -2423,3 +2425,28 @@ components:
         updated_at:
           type: string
           format: date-time
+    AgendaReorderRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/ReorderItem'
+          description: List of items with new display orders
+      required:
+        - items
+    ReorderItem:
+      type: object
+      properties:
+        item_id:
+          type: string
+          format: uuid
+          description: ID of the agenda item
+        display_order:
+          type: integer
+          minimum: 0
+          description: New display order for the item
+      required:
+        - item_id
+        - display_order

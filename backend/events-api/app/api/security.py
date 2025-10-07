@@ -2,10 +2,11 @@ from fastapi import HTTPException, Header, Depends
 from sqlalchemy.orm import Session
 from typing import Annotated
 import re
-from uuid import UUID
+# Removed UUID import since we're using NanoID strings now
 
 from app.database.db import get_db
 from app.database.daos import UserQuery
+from app.utils.logger import logger
 
 
 def get_user_id(
@@ -26,13 +27,11 @@ def get_user_id(
     # Remove "Bearer " prefix if present
     token = authorization.replace("Bearer ", "").strip()
     
-    # Validate token format (UUID format)
-    try:
-        UUID(token)
-    except ValueError:
+    # Validate token format (NanoID format - 12 characters)
+    if len(token) != 12 or not token.replace('-', '').replace('_', '').isalnum():
         raise HTTPException(
             status_code=401,
-            detail="Invalid token format. Must be a valid UUID."
+            detail="Invalid token format. Must be a valid 12-character NanoID."
         )
     
     return token

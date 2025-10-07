@@ -1,123 +1,236 @@
 # Events API
 
-Events Management Platform API - MVP Faza 1
+Simple FastAPI service for managing events with automatic database initialization.
 
-## Opis
+## Features
 
-API servis za upravljanje događajima sa QR kod sistemom. Omogućava korisnicima kreiranje i upravljanje događajima.
+- **Automatic Database Setup**: Creates database, schema, and tables automatically on startup
+- **Health Check**: `/health-check` endpoint with database connectivity verification
+- **User Management**: Create and manage users
+- **Event Management**: CRUD operations for events
+- **Single Database**: Uses one shared database instead of per-user databases
 
-## Struktura
+## Quick Start
 
+### 1. Environment Setup
+
+Copy the example environment file:
+```bash
+cp .env.example .env
 ```
-events-api/
-├── app/
-│   ├── api/
-│   │   ├── models.py      # Pydantic modeli
-│   │   ├── services.py    # Business logika
-│   │   └── security.py    # Auth sistem
-│   ├── database/
-│   │   ├── models.py      # SQLAlchemy modeli
-│   │   ├── daos.py        # Data Access Objects
-│   │   └── db.py          # Database konfiguracija
-│   ├── routers/
-│   │   └── routes.py      # API rute
-│   ├── utils/
-│   │   ├── config.py      # Konfiguracija
-│   │   ├── logger.py      # Logging
-│   │   └── utils.py       # Utility funkcije
-│   └── main.py            # FastAPI aplikacija
-├── tests/
-├── requirements.txt
-├── Dockerfile
-├── docker-compose.yml
-└── run_server.sh
+
+Edit `.env` with your database credentials:
+```bash
+POSTGRES_DB_HOST=localhost
+POSTGRES_DB_PORT=5432
+POSTGRES_DB_USER=postgres
+POSTGRES_DB_PASSWORD=your_password
+POSTGRES_DB_NAME=eventsdb
+POSTGRES_DB_SCHEMA=public
+```
+
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run the API
+
+```bash
+./run_server.sh
+```
+
+The API will:
+- Automatically create the database if it doesn't exist
+- Create the schema if it doesn't exist  
+- Create all tables if they don't exist
+- Start the server on port 8080
+
+### 4. Test Database Initialization
+
+```bash
+python3 test_db_init.py
+```
+
+### 5. Test the API
+
+```bash
+curl http://localhost:8080/health-check
 ```
 
 ## API Endpoints
 
-### Users
-- `POST /users` - Kreiranje novog korisnika
-- `GET /users/profile` - Dohvatanje profila korisnika
-- `PUT /users/profile` - Ažuriranje profila korisnika
+### System Endpoints
 
-### Events
-- `GET /events` - Dohvatanje svih događaja korisnika
-- `POST /events` - Kreiranje novog događaja
-- `GET /events/{event_id}` - Dohvatanje detalja događaja
-- `PUT /events/{event_id}` - Ažuriranje događaja
-- `DELETE /events/{event_id}` - Brisanje događaja
-
-### Utility
-- `GET /health-check` - Health check
-- `DELETE /recreate-tables` - Rekreiranje tabela (development)
-
-## Autentifikacija
-
-API koristi fake auth sistem za development:
-- Authorization header: `Bearer <user_uuid>`
-- user_uuid mora biti validan UUID
-- Korisnik mora postojati u bazi podataka
-
-## Pokretanje
-
-### Lokalno
-```bash
-# Kreiranje virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Instaliranje dependencies
-pip install -r requirements.txt
-
-# Pokretanje servera
-./run_server.sh
+#### `GET /health-check`
+Health check with database connectivity verification
+```json
+Response: {"HEALTH": "OK", "database": "connected"}
 ```
 
-### Docker
-```bash
-# Pokretanje sa Docker Compose
-docker-compose up --build
+#### `DELETE /recreate-tables?recreate=true`
+Recreate all database tables and enum types (destructive operation)
+```json
+Response: {"detail": "Tables recreated successfully"}
 ```
 
-## Database
+### User Management
 
-- PostgreSQL
-- Svaki korisnik ima svoju bazu podataka
-- Automatsko kreiranje baze i tabela
-- Foreign key relacija između events i users tabela
+#### `POST /users`
+Create a new user
+```json
+{
+  "email": "user@example.com",
+  "name": "John Doe"
+}
+```
 
-## Modeli
+#### `GET /users/profile`
+Get user profile (requires Authorization header)
+```json
+Response: {"id": "user_id", "email": "user@example.com", "name": "John Doe"}
+```
 
-### User
-- id (UUID, primary key)
-- email (unique)
-- first_name
-- last_name
-- phone
-- created_at
-- updated_at
+#### `PUT /users/profile`
+Update user profile (requires Authorization header)
+```json
+{
+  "email": "newemail@example.com",
+  "name": "Jane Doe"
+}
+```
 
-### Event
-- id (UUID, primary key)
-- name
-- plan (freemium, starter, plus, full)
-- location
-- restaurant_name
-- date
-- time
-- event_type (wedding, birthday, baptism, graduation, anniversary, corporate, other)
-- expected_guests
-- description
-- qr_code_url
-- landing_page_url
-- photo_count
-- guest_count
-- status (active, expired, draft)
-- expires_at
-- created_at
-- updated_at
-- owner_id (UUID, foreign key to users.id)
+### Event Management
 
-## Port
+#### `GET /events`
+Get user's events with optional filtering (requires Authorization header)
+Query parameters: `status` (active/expired/draft), `limit` (1-1000), `offset`
+```json
+Response: {"events": [...], "total": 10, "limit": 20, "offset": 0}
+```
 
-API se pokreće na portu 8081.
+#### `POST /events`
+Create new event (requires Authorization header)
+```json
+{
+  "title": "My Event",
+  "description": "Event description",
+  "start_time": "2024-12-01T10:00:00Z",
+  "end_time": "2024-12-01T18:00:00Z",
+  "location": "Conference Center",
+  "status": "draft"
+}
+```
+
+#### `GET /events/{event_id}`
+Get specific event (requires Authorization header)
+```json
+Response: {"id": "event_id", "title": "My Event", "description": "...", ...}
+```
+
+#### `PUT /events/{event_id}`
+Update event (requires Authorization header)
+```json
+{
+  "title": "Updated Event Title",
+  "description": "Updated description",
+  "status": "active"
+}
+```
+
+#### `DELETE /events/{event_id}`
+Delete event (requires Authorization header)
+```json
+Response: {"detail": "Event deleted successfully"}
+```
+
+### Agenda Management
+
+#### `GET /events/{event_id}/agenda`
+Get agenda for an event with all items ordered by display_order and start_time
+```json
+Response: {"id": "agenda_id", "event_id": "event_id", "items": [...]}
+```
+
+#### `POST /events/{event_id}/agenda`
+Create a new agenda for an event
+```json
+{
+  "title": "Event Agenda",
+  "description": "Main agenda for the event"
+}
+```
+
+#### `PUT /events/{event_id}/agenda`
+Update an existing agenda for an event
+```json
+{
+  "title": "Updated Agenda Title",
+  "description": "Updated agenda description"
+}
+```
+
+#### `DELETE /events/{event_id}/agenda`
+Delete an agenda and all its items (cascade delete)
+```json
+Response: 204 No Content
+```
+
+### Agenda Items Management
+
+#### `POST /events/{event_id}/agenda/items`
+Create a new agenda item for an event's agenda
+```json
+{
+  "title": "Opening Keynote",
+  "description": "Welcome and introduction",
+  "start_time": "2024-12-01T09:00:00Z",
+  "end_time": "2024-12-01T10:00:00Z",
+  "speaker": "John Speaker",
+  "location": "Main Hall",
+  "display_order": 1
+}
+```
+
+#### `PUT /events/{event_id}/agenda/items/{item_id}`
+Update an existing agenda item
+```json
+{
+  "title": "Updated Keynote Title",
+  "speaker": "Jane Speaker",
+  "display_order": 2
+}
+```
+
+#### `DELETE /events/{event_id}/agenda/items/{item_id}`
+Delete a specific agenda item
+```json
+Response: 204 No Content
+```
+
+#### `PUT /events/{event_id}/agenda/reorder`
+Reorder agenda items by updating their display_order values
+```json
+{
+  "item_orders": [
+    {"item_id": "item1", "display_order": 1},
+    {"item_id": "item2", "display_order": 2}
+  ]
+}
+```
+
+## Authentication
+
+The API uses a simple Bearer token system for testing. Include the user UUID in the Authorization header:
+
+```bash
+curl -H "Authorization: Bearer your-user-uuid" http://localhost:8080/events
+```
+
+## Docker
+
+```bash
+docker build -t events-api .
+docker run -p 8080:8080 -e POSTGRES_DB_HOST=host.docker.internal events-api
+```

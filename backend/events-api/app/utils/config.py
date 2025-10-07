@@ -5,6 +5,7 @@ config_variables = {
     "POSTGRES_DB_USER": os.getenv("POSTGRES_DB_USER") or "no db user",
     "POSTGRES_DB_HOST": os.getenv("POSTGRES_DB_HOST") or "postgres",
     "POSTGRES_DB_PORT": os.getenv("POSTGRES_DB_PORT") or "5432",
+    "POSTGRES_DB_NAME": os.getenv("POSTGRES_DB_NAME") or "eventsdb",
     "POSTGRES_DB_SCHEMA": os.getenv("POSTGRES_DB_SCHEMA") or "postgres"
 }
 
@@ -22,26 +23,62 @@ class Config(object):
 class BasicConfig(Config):
 
     @property
-    def db_host(self):
+    def POSTGRES_DB_HOST(self):
         return self.get_property("POSTGRES_DB_HOST")
 
     @property
-    def db_port(self):
+    def POSTGRES_DB_PORT(self):
         return self.get_property("POSTGRES_DB_PORT")
 
     @property
-    def db_password(self):
+    def POSTGRES_DB_PASSWORD(self):
         return self.get_property("POSTGRES_DB_PASSWORD")
 
     @property
-    def db_user(self):
+    def POSTGRES_DB_USER(self):
         return self.get_property("POSTGRES_DB_USER")
 
     @property
-    def db_schema(self):
+    def POSTGRES_DB_NAME(self):
+        return self.get_property("POSTGRES_DB_NAME")
+
+    @property
+    def DATABASE_SCHEMA(self):
         return self.get_property("POSTGRES_DB_SCHEMA")
+
+    @property
+    def DATABASE_URL(self):
+        return f"postgresql://{self.POSTGRES_DB_USER}:{self.POSTGRES_DB_PASSWORD}@{self.POSTGRES_DB_HOST}:{self.POSTGRES_DB_PORT}/{self.POSTGRES_DB_NAME}"
+
+    # Keep old property names for backward compatibility
+    @property
+    def db_host(self):
+        return self.POSTGRES_DB_HOST
+
+    @property
+    def db_port(self):
+        return self.POSTGRES_DB_PORT
+
+    @property
+    def db_password(self):
+        return self.POSTGRES_DB_PASSWORD
+
+    @property
+    def db_user(self):
+        return self.POSTGRES_DB_USER
+
+    @property
+    def db_name(self):
+        return self.POSTGRES_DB_NAME
+
+    @property
+    def db_schema(self):
+        return self.DATABASE_SCHEMA
 
 
 config_by_name = dict(
     BasicConfig=BasicConfig()
 )
+
+# Create settings alias for easier access
+settings = BasicConfig()

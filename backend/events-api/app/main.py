@@ -8,8 +8,21 @@ from fastapi.responses import JSONResponse
 from app.routers.routes import api
 from starlette.middleware.base import BaseHTTPMiddleware
 from app.utils.logger import logger, user_id
+from app.database.db import create_tables
 
 app = FastAPI(default_response_class=responses.ORJSONResponse)
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on startup"""
+    try:
+        logger.info("Initializing database on startup...")
+        create_tables()
+        logger.info("Database initialization completed successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize database on startup: {e}")
+        # Don't raise here to allow API to start, database will be initialized on first request
 
 
 class ProcessTimeMiddleware(BaseHTTPMiddleware):
@@ -63,4 +76,4 @@ app.add_middleware(
 app.include_router(api, prefix="")
 
 if __name__ == "__main__":
-    uvicorn.run(app, port=8081, log_level="info", reload=True)  # pragma: no cover
+    uvicorn.run(app, port=8080, log_level="info", reload=True)  # pragma: no cover

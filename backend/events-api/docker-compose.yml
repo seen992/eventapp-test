@@ -1,27 +1,26 @@
 services:
-  eventsapp-api:
+  events-api-develop:
     build:
       context: "."
     restart: always
-    container_name: eventsapp-api
-    working_dir: /opt/eventsapp
+    container_name: events-api-develop
+    working_dir: /opt/basicduo
     command: uvicorn app.main:app --host 0.0.0.0 --reload --port 8080 --workers 1
     ports:
-      - 9118:8080
+      - 9119:8080
     networks:
       - seen_develop
     environment:
       DEBUG: 1
-      POSTGRES_DB_USER: ${POSTGRES_DB_USER:-postgres}
-      POSTGRES_DB_PASSWORD: ${POSTGRES_DB_PASSWORD:-password}
-      POSTGRES_DB_HOST: ${POSTGRES_DB_HOST:-postgres_container}
-      POSTGRES_DB_PORT: ${POSTGRES_DB_PORT:-5432}
-      POSTGRES_DB_NAME: ${POSTGRES_DB_NAME:-postgres_test}
-      DATABASE_SCHEMA: ${POSTGRES_DB_SCHEMA:-eventsapp}
+      POSTGRES_DB_PASSWORD: changeme
+      POSTGRES_DB_USER: postgres
+      POSTGRES_DB_HOST: "postgres_container"
+      POSTGRES_DB_PORT: 5432
+      POSTGRES_DB_SCHEMA: eventsapp
     volumes:
-      - ./app:/opt/eventsapp/app
-      - ./tests:/opt/eventsapp/tests
-      - ./alembic:/opt/eventsapp/alembic
+      - ./app:/opt/basicduo/app
+      - ./tests:/opt/basicduo/tests
+      - ./alembic:/opt/basicduo/alembic
 networks:
   seen_develop:
     external: true

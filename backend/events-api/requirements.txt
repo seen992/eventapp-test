@@ -8,3 +8,4 @@ psycopg2-binary==2.9.10
 orjson==3.10.18
 urllib3==2.4.0
 pytest-cov==6.1.1
+nanoid==2.0.0

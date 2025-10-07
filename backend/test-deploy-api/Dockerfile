@@ -3,7 +3,7 @@ FROM python:3.13-slim
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PYTHONUNBUFFERED=1
 
-WORKDIR /opt/basicduo
+WORKDIR /opt/test-deploy-api
 
 # Install dependencies
 ADD requirements.txt ./
@@ -13,7 +13,6 @@ RUN echo ">>> Installing requirements..." && \
 
 # Add application code
 ADD app ./app
-ADD tests ./tests
 ADD run_server.sh ./
 
 # Fix line endings and make executable
